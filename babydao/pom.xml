@@ -11,5 +11,11 @@
 
     <artifactId>babydao</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>com</groupId>
+            <artifactId>babyutils</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>

@@ -11,5 +11,12 @@
 
     <artifactId>babyutils</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com</groupId>
+            <artifactId>babybeans</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>
