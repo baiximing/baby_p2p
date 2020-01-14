@@ -73,7 +73,7 @@
 						登录
 					</button>
 					&emsp;&emsp;
-					<a href="register.html">新用户，马上注册</a>
+					<a href="/user/toRegister">新用户，马上注册</a>
 				</div>
 			</div>
 		</form>
@@ -116,7 +116,6 @@
             submitHandler:function(form){
 
                 $(form).ajaxSubmit(function(result){
-
                     // 如果返回的数据的响应码不是'成功(200)'
                     if(result.code != 200) {
                         $.messager.alert(result.msg);
@@ -134,7 +133,7 @@
 						if(redirectUrl)
 					   		window.location.href= './' + redirectUrl;
 						else
-						    window.location.href="index.html";
+						    window.location.href="toIndex";
 
 					});
 
