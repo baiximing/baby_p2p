@@ -125,6 +125,7 @@
 
                     // 如果返回的数据响应码为200
 					// 将账户信息存入到客户端session中
+
 					sessionStorage.setItem( "user", JSON.stringify(result.data) );
 
 					$.messager.confirm("提示",'登录成功!',function(){

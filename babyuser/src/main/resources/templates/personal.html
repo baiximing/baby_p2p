@@ -6,16 +6,16 @@
 		
 		<!-- links begin -->
 		<link rel="shortcut icon" href="../static/favicon.ico" />
-		<link rel="stylesheet" href="js/bootstrap-3.3.2-dist/css/bootstrap.css" type="text/css" />
-        <link rel="stylesheet" href="css/core.css" type="text/css" />
-        <script type="text/javascript" src="js/jquery/jquery-2.1.3.js"></script>
-        <script type="text/javascript" src="js/bootstrap-3.3.2-dist/js/bootstrap.js"></script>
-        <script type="text/javascript" src="js/jquery.bootstrap.js"></script>
+		<link rel="stylesheet" href="/js/bootstrap-3.3.2-dist/css/bootstrap.css" type="text/css" />
+        <link rel="stylesheet" href="/css/core.css" type="text/css" />
+        <script type="text/javascript" src="/js/jquery/jquery-2.1.3.js"></script>
+        <script type="text/javascript" src="/js/bootstrap-3.3.2-dist/js/bootstrap.js"></script>
+        <script type="text/javascript" src="/js/jquery.bootstrap.js"></script>
         <!-- links end -->
-		<script type="text/javascript" src="js/plugins/jquery.form.js"></script>
+		<script type="text/javascript" src="/js/plugins/jquery.form.js"></script>
 		<link type="text/css" rel="stylesheet" href="css/account.css" />
 
-		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="/js/common.js"></script>
 		
 	</head>
 	<body>
@@ -103,36 +103,41 @@
 
     // 判断用户是否已经登录
     let jsonUser = sessionStorage.getItem("user");
-    if(!jsonUser) window.location.href = 'index.html';
+    if(!jsonUser) window.location.href = '/user/toIndex';
 
     $(function(){
 
         // 加载公共顶部模板
-        $('.el-header').load('tpl-head.html');
+        $('.el-header').load('/tpl-head.html');
 
         // 加载网站导航栏模板
-        $('.el-navbar').load('tpl-navbar.html');
+        $('.el-navbar').load('/tpl-navbar.html');
 
         // 加载左侧菜单栏模板
-		$('.el-leftmenu').load('tpl-leftmenu.html');
+		$('.el-leftmenu').load('/tpl-leftmenu.html');
 
 		// 加载页脚模板
-		$('.container-foot-2').load('tpl-footer.html');
+		$('.container-foot-2').load('/tpl-footer.html');
 
 
 		//--->>>加载账户基本信息 Begin
 
-		// 获取本地session中的用户数据
+        // 获取本地session中的用户数据
         let jsonUser = sessionStorage.getItem("user");
-        let user = JSON.parse(jsonUser);
-
+        let user1 = JSON.parse(jsonUser);
+        let user = eval("("+user1+")");
         // 填充页面
 		$('.username').text(user.username);
-		$('.lastLoginTime').text(user.lastLoginTime);
+		$('.lastLoginTime').text(getLocalTime(user.lastLoginTime));
 
+		//转换时间戳
+        function getLocalTime(nS) {
+            return new Date(parseInt(nS)).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");
+        }
 
         // 加载用户基本信息
         $.post('http://localhost:8080/user/userinfo/get/' + user.id, function (result) {
+
 
             // 如果返回的数据的响应码不是'成功(200)'
             if(result.code != 200) {
@@ -163,6 +168,8 @@
             // 如果返回的响应码正确，就进行数据填充
 		    let userWallet = result.data;
 
+
+          /*  let userWallet = eval("("+userWallet1+")");*/
             // 可用金额
 		    $('#availableAmount').text(userWallet.availableAmount / MONEY_UNIT + '元');
 		    // 冻结金额

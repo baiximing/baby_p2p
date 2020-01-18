@@ -21,7 +21,7 @@ public class UserServiceImpl implements  UserService {
 
     @Override
     public int insert(TUserAccount entity) {
-        return 0;
+        return userMapper.insert(entity);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class UserServiceImpl implements  UserService {
 
     @Override
     public int updateById(TUserAccount entity) {
-        return 0;
+        return userMapper.updateById(entity);
     }
 
     @Override

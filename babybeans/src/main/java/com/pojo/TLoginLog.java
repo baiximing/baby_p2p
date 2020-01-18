@@ -1,15 +1,17 @@
 package com.pojo;
 
 
+import java.util.Date;
+
 public class TLoginLog {
 
   private long id;
   private String ip;
-  private java.sql.Timestamp loginTime;
+  private Date loginTime;
   private String username;
   private long accountType;
   private long loginResult;
-  private java.sql.Timestamp createTime;
+  private Date createTime;
 
 
   public long getId() {
@@ -30,11 +32,11 @@ public class TLoginLog {
   }
 
 
-  public java.sql.Timestamp getLoginTime() {
+  public Date getLoginTime() {
     return loginTime;
   }
 
-  public void setLoginTime(java.sql.Timestamp loginTime) {
+  public void setLoginTime(Date loginTime) {
     this.loginTime = loginTime;
   }
 
@@ -66,11 +68,11 @@ public class TLoginLog {
   }
 
 
-  public java.sql.Timestamp getCreateTime() {
+  public Date getCreateTime() {
     return createTime;
   }
 
-  public void setCreateTime(java.sql.Timestamp createTime) {
+  public void setCreateTime(Date createTime) {
     this.createTime = createTime;
   }
 

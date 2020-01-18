@@ -1,5 +1,7 @@
 package com.pojo;
 
+import java.util.Date;
+
 public class TUserWallet {
 
   private String accountId;
@@ -11,7 +13,7 @@ public class TUserWallet {
   private long creditScore;
   private long creditLine;
   private long residualCreditLine;
-  private java.sql.Timestamp createTime;
+  private Date createTime;
 
 
   public String getAccountId() {
@@ -95,11 +97,11 @@ public class TUserWallet {
   }
 
 
-  public java.sql.Timestamp getCreateTime() {
+  public Date getCreateTime() {
     return createTime;
   }
 
-  public void setCreateTime(java.sql.Timestamp createTime) {
+  public void setCreateTime(Date createTime) {
     this.createTime = createTime;
   }
 
