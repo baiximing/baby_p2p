@@ -50,7 +50,7 @@ public class UserWalletServiceImpl implements UserWalletService {
 
     @Override
     public int update(TUserWallet entity, Wrapper<TUserWallet> updateWrapper) {
-        return 0;
+        return userWalletMapper.update(entity,updateWrapper);
     }
 
     @Override

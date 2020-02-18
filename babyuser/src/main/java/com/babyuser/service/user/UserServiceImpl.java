@@ -51,7 +51,7 @@ public class UserServiceImpl implements  UserService {
 
     @Override
     public int update(TUserAccount entity, Wrapper<TUserAccount> updateWrapper) {
-        return 0;
+        return userMapper.update(entity,updateWrapper);
     }
 
     @Override

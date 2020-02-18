@@ -1,6 +1,8 @@
 package com.pojo;
 
 
+import java.util.Date;
+
 public class TBorrow {
 
   private String id;
@@ -15,14 +17,14 @@ public class TBorrow {
   private long yearRate;
   private long repaymentMonth;
   private long bidNum;
-  private long totalInterest;
+  private Double totalInterest;
   private long currentBidAmount;
   private long currentBidInterest;
-  private java.sql.Timestamp bidDeadline;
+  private Date bidDeadline;
   private long bidDays;
-  private java.sql.Timestamp applyTime;
-  private java.sql.Timestamp publishTime;
-  private java.sql.Timestamp createTime;
+  private Date applyTime;
+  private Date publishTime;
+  private Date createTime;
 
 
   public String getId() {
@@ -133,11 +135,11 @@ public class TBorrow {
   }
 
 
-  public long getTotalInterest() {
+  public Double getTotalInterest() {
     return totalInterest;
   }
 
-  public void setTotalInterest(long totalInterest) {
+  public void setTotalInterest(Double totalInterest) {
     this.totalInterest = totalInterest;
   }
 
@@ -160,11 +162,11 @@ public class TBorrow {
   }
 
 
-  public java.sql.Timestamp getBidDeadline() {
+  public Date getBidDeadline() {
     return bidDeadline;
   }
 
-  public void setBidDeadline(java.sql.Timestamp bidDeadline) {
+  public void setBidDeadline(Date bidDeadline) {
     this.bidDeadline = bidDeadline;
   }
 
@@ -178,29 +180,29 @@ public class TBorrow {
   }
 
 
-  public java.sql.Timestamp getApplyTime() {
+  public Date getApplyTime() {
     return applyTime;
   }
 
-  public void setApplyTime(java.sql.Timestamp applyTime) {
+  public void setApplyTime(Date applyTime) {
     this.applyTime = applyTime;
   }
 
 
-  public java.sql.Timestamp getPublishTime() {
+  public Date getPublishTime() {
     return publishTime;
   }
 
-  public void setPublishTime(java.sql.Timestamp publishTime) {
+  public void setPublishTime(Date publishTime) {
     this.publishTime = publishTime;
   }
 
 
-  public java.sql.Timestamp getCreateTime() {
+  public Date getCreateTime() {
     return createTime;
   }
 
-  public void setCreateTime(java.sql.Timestamp createTime) {
+  public void setCreateTime(Date createTime) {
     this.createTime = createTime;
   }
 

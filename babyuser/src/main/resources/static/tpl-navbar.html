@@ -2,12 +2,12 @@
 <div class="container">
     <div class="navbar-header">
         <a href="/">
-            <img alt="Brand" src="/images/logo.png">
+            <img alt="Brand" src="images/logo.png">
         </a>
     </div>
     <ul id="ulNavbar" class="nav navbar-nav">
-        <li id="index"><a href="../templates/index.html">首页</a></li>
-        <li id="invest"><a href="../templates/invest.html">我要投资</a></li>
+        <li id="index"><a href="index.html">首页</a></li>
+        <li id="invest"><a href="invest.html">我要投资</a></li>
         <li id="borrow"><a href="javascript:void(0)">我要借款</a></li>
         <li id="personal"><a href="javascript:void(0)">个人中心</a></li>
     </ul>
@@ -29,14 +29,14 @@
 
             // 如果用户已经登录过，就跳转到'个人中心'页面
             if( jsonUser ){
-                window.location.href = '/user/toPersonal';
+                window.location.href = 'personal.html';
                 return;
             };
 
 
             // 如果用户没有登录过，则引导用户跳转到登录页面
             $.messager.confirm("提示",'您暂未登录，点击"确定"，跳转到登录页...',function(){
-                window.location.href = '/user/toLogin?redirectUrl=toPersonal';
+                window.location.href = 'login.html?redirectUrl=personal.html';
             });
 
         });// $('#personal').click();

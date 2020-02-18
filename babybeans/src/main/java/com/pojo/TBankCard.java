@@ -1,5 +1,7 @@
 package com.pojo;
 
+import java.util.Date;
+
 public class TBankCard {
 
   private String id;
@@ -9,7 +11,7 @@ public class TBankCard {
   private String cardNumber;
   private String branchName;
   private long balance;
-  private java.sql.Timestamp createTime;
+  private Date createTime;
 
 
   public String getId() {
@@ -75,11 +77,11 @@ public class TBankCard {
   }
 
 
-  public java.sql.Timestamp getCreateTime() {
+  public Date getCreateTime() {
     return createTime;
   }
 
-  public void setCreateTime(java.sql.Timestamp createTime) {
+  public void setCreateTime(Date createTime) {
     this.createTime = createTime;
   }
 

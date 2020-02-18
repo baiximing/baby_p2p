@@ -1,6 +1,8 @@
 package com.pojo;
 
 
+import java.util.Date;
+
 public class TUserInfo {
 
   private String accountId;
@@ -12,7 +14,7 @@ public class TUserInfo {
   private long marriageId;
   private long eduBackgroundId;
   private long houseConditionId;
-  private java.sql.Timestamp createTime;
+  private Date createTime;
 
 
   public String getAccountId() {
@@ -96,11 +98,11 @@ public class TUserInfo {
   }
 
 
-  public java.sql.Timestamp getCreateTime() {
+  public Date getCreateTime() {
     return createTime;
   }
 
-  public void setCreateTime(java.sql.Timestamp createTime) {
+  public void setCreateTime(Date createTime) {
     this.createTime = createTime;
   }
 

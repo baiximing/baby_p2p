@@ -11,7 +11,8 @@
         <script type="text/javascript" src="/js/bootstrap-3.3.2-dist/js/bootstrap.js"></script>
         <script type="text/javascript" src="/js/jquery.bootstrap.js"></script>
         <!-- links end -->
-		<link type="text/css" rel="stylesheet" href="/css/account.css" />
+		<!--<link type="text/css" rel="stylesheet" href="/css/account.css" />-->
+		<link rel="stylesheet" href="/css/account.css" type="text/css" />
 		<script type="text/javascript" src="/js/plugins/jquery.form.js"></script>
 		<!-- webuploader -->
 		<link rel="stylesheet" href="/js/webuploader-0.1.5/webuploader.css" />
@@ -48,7 +49,7 @@
 								</label>
 								<div class="col-sm-8">
 									<div class="pull-left el-head-img">
-										<img id="imgAvatar" width="180" height="180" class="icon" src="images/nobody.jpg" />
+										<img id="imgAvatar" width="180" height="180" class="icon" src="/images/nobody.jpg" />
 									</div>
 								</div>
 							</div>
@@ -139,7 +140,7 @@
 								</label>
 								<div class="col-sm-8">
 									<div class="pull-left el-head-img">
-										<img id="imgEditAvatar" width="180" height="180" class="icon" src="images/nobody.jpg" />
+										<img id="imgEditAvatar" width="180" height="180" class="icon" src="/images/nobody.jpg" />
 										<a href="javascript:;" id="uploadAvatar" >上传头像</a>
 										<input type="hidden" name="avatar" id="avatar" value="nobody.jpg" />
 									</div>
@@ -252,7 +253,7 @@ let systemDictionaryItemList = new Array();
 
 // 判断用户是否已经登录
 let jsonUser = sessionStorage.getItem("user");
-if(!jsonUser) window.location.href = 'index.html';
+if(!jsonUser) window.location.href = '/user/toIndex';
 
 // 如果用户已经登录，则解析出user对象
 let user = JSON.parse(jsonUser);
@@ -310,8 +311,9 @@ $(function(){
 
 	// '上传头像'组件
 	uploader = WebUploader.create({
+
 		auto: true, // 自动进行上传
-		swf: 'js/webuploader-0.1.5/Uploader.swf',
+		swf: '/js/webuploader-0.1.5/Uploader.swf',
 		server: 'http://localhost:8080/user/userinfo/uploadAvatar',
 		pick: '#uploadAvatar', // 按钮元素id
 		resize: false,   // 不压缩图片大小
@@ -339,6 +341,7 @@ $(function(){
         // 如果返回响应码为'成功(200)'
         // 头像图片上传成功之后，回显到<image>标签中
         $('#imgEditAvatar').attr('src', IMAGE_AVATAR_URL + result.data);
+
         $('#avatar').val(result.data);
 
     });// uploader.on('uploadSuccess');

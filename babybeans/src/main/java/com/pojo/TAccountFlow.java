@@ -1,6 +1,8 @@
 package com.pojo;
 
 
+import java.util.Date;
+
 public class TAccountFlow {
 
   private long id;
@@ -10,7 +12,7 @@ public class TAccountFlow {
   private long availableAmount;
   private long freezeAmount;
   private String remark;
-  private java.sql.Timestamp createTime;
+  private Date createTime;
 
 
   public long getId() {
@@ -76,11 +78,11 @@ public class TAccountFlow {
   }
 
 
-  public java.sql.Timestamp getCreateTime() {
+  public Date getCreateTime() {
     return createTime;
   }
 
-  public void setCreateTime(java.sql.Timestamp createTime) {
+  public void setCreateTime(Date createTime) {
     this.createTime = createTime;
   }
 

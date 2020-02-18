@@ -79,7 +79,9 @@ let BORROW_STATE = {
 let BORROW_STATE_CONST = {
 
     UNDO: 0, // '已撤销',
-    PUBLISH_PENDING: 10, // '发布审核中',
+    PUBLISH_PENDING: 10,
+
+    // '发布审核中',
     PUBLISH_AUDIT_REJECT: 11, // '发布审核拒绝',
     PUBLISH_AUDIT_PASS: 12, // '发布审核通过',
     BIDDING: 20, // '招标中',
