@@ -33,7 +33,7 @@
 					<h3>借款审核</h3>
 				</div>
 				<!-- 查询面板 Begin -->
-				<form action="http://localhost:8081/finance/borrow/query" name="searchForm" id="searchForm" class="form-inline">
+				<form action="http://localhost:8080/finance/borrow/query" name="searchForm" id="searchForm" class="form-inline">
 					<div class="form-group">
 						<label>申请日期:</label>
 						<input type="text" id="beginDate" name="beginDate" class="form-control" style="cursor: pointer; background:#fff;" readonly="true" autocomplete="off" value='' />
@@ -93,7 +93,7 @@
 		  <div class="modal-dialog modal-lg" role="document">
 		    <div class="modal-content">
 		      <div class="modal-body">
-		      	<form class="form-horizontal" id="editform" method="post" action="http://localhost:8081/finance/borrow/audit">
+		      	<form class="form-horizontal" id="editform" method="post" action="http://localhost:8080/finance/borrow/audit">
 					<fieldset>
 						<div id="legend" class="">
 							<legend>借款审核</legend>
@@ -162,7 +162,7 @@ let borrowList = new Array();
 
 // 查询条件对象
 let queryObject = new Object();
-queryObject.currentPage=1;
+
 // 判断用户是否已经登录
 let jsonUser = sessionStorage.getItem("admin");
 if(!jsonUser) window.location.href = 'login.html';
@@ -285,8 +285,9 @@ $(function() {
 
 /** 加载'借款记录'数据 **/
 function loadBorrow(){
+
     // 加载'借款记录'数据
-    $.post('http://localhost:8081/finance/borrow/query', queryObject, function (result) {
+    $.post('http://localhost:8080/finance/borrow/query', queryObject, function (result) {
 
         // 如果返回的数据的响应码不是'成功(200)'
         if(result.code != 200) {
@@ -297,21 +298,21 @@ function loadBorrow(){
         // 如果返回的数据响应码为200
         // 就进行表格数据填充
         let pageResult = result.data;
-        // 将分页集合赋值给全局变量
-        borrowList = pageResult;
 
+        // 将分页集合赋值给全局变量
+        borrowList = pageResult.listData;
 
         // 填充表格数据
-        fillBorrowTable( borrowList.records);
+        fillBorrowTable( pageResult.listData );
 
         // 初始化分页插件
         $("#pagination").remove();
         $("#divPagination").append('<ul id="pagination" class="pagination"></ul>');
 
         $("#pagination").twbsPagination({
-            totalPages: pageResult.pages,
-            visiblePages: 5,
-            startPage: pageResult.current,
+            totalPages: pageResult.totalPage,
+            visiblePages: 10,
+            startPage: pageResult.currentPage,
             first: '首页',
             last: '最后一页',
             prev: '上一页',
@@ -346,7 +347,8 @@ function fillBorrowTable( listData ) {
     for( let i = 0; i < listData.length; i++ ) {
 
         let borrow = listData[i];
-        let tdTitle = '<td><a target="_blank" href="borrow-info.html?id=' + borrow.id + '">' + borrow.title + '</a>&nbsp;<span class="label label-primary">信</span></td>';
+
+        let tdTitle = '<td><a target="_blank" href=' + borrow.id + '"borrow-info.html?id=">' + borrow.title + '</a>&nbsp;<span class="label label-primary">信</span></td>';
         let tdBorrowUsername = '<td>' + borrow.borrowUsername + '</td>';
         let tdApplyTime = '<td>' + borrow.applyTime + '</td>';
 
@@ -406,7 +408,7 @@ function showBorrowAuditModal( id ){
     $('#totalInterest').text(borrow.totalInterest / MONEY_UNIT + '元');
 
 
-       // 显示'借款审核'编辑窗口
+    // 显示'借款审核'编辑窗口
     $("#borrowAuditModal").modal("show");
 
     return false;

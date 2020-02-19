@@ -34,7 +34,7 @@
 				<hr />
 				<!-- 功能页面 -->
 				<div class="col-sm-9">
-					<form action="http://localhost:8082/finance/repayment/query" name="searchForm" id="searchForm" class="form-inline">
+					<form action="http://localhost:8080/finance/repayment/query" name="searchForm" id="searchForm" class="form-inline">
 						<div class="form-group">
 							<label>还款期限:</label>
 							<input type="text" id="beginDate" name="beginDate" class="form-control" style="cursor: pointer; background:#fff;" readonly="true" autocomplete="off" value='' />
@@ -101,14 +101,12 @@
 let jsonUser = sessionStorage.getItem("user");
 if(!jsonUser) window.location.href = 'index.html';
 
-
 // 如果用户已经登录，则解析出user对象
-let user1 = JSON.parse(jsonUser);
-let user=eval("("+user1+")");
+let user = JSON.parse(jsonUser);
+
 // 查询条件对象
 let queryObject = new Object();
-queryObject.borrowUserId = user.id;
-queryObject.currentPage=1;
+queryObject.userId = user.id;
 
 $(function(){
 
@@ -161,7 +159,7 @@ $(function(){
         queryObject.endDate = endDate + ' 23:59:59';
         queryObject.state = state;
         queryObject.currentPage  = 1;
-         alert(queryObject.currentPage);
+
         // 加载'还款列表'
         loadRepayment();
 
@@ -176,11 +174,8 @@ $(function(){
 /** 加载'还款'数据 **/
 function loadRepayment(){
 
-	/*let JSONQueryObject=JSON.stringify(queryObject);*/
-    /*let JSONQueryObject=JSON.parse(JSONQueryObject1);*/
-   /* alert("123:"+JSONQueryObject);*/
     // 加载'还款记录'数据
-    $.post('http://localhost:8082/finance/repayment/query', queryObject, function (result) {
+    $.post('http://localhost:8080/finance/repayment/query', queryObject, function (result) {
 
         // 如果返回的数据的响应码不是'成功(200)'
         if(result.code != 200) {
@@ -193,16 +188,16 @@ function loadRepayment(){
         let pageResult = result.data;
 
         // 填充表格数据
-        fillRepaymentTable( pageResult.records );
+        fillRepaymentTable( pageResult.listData );
 
         // 初始化分页插件
         $("#pagination").remove();
         $("#divPagination").append('<ul id="pagination" class="pagination"></ul>');
 
         $("#pagination").twbsPagination({
-            totalPages: pageResult.pages,
-            visiblePages: 3,
-            startPage: pageResult.current,
+            totalPages: pageResult.totalPage,
+            visiblePages: 10,
+            startPage: pageResult.currentPage,
             first: '首页',
             last: '最后一页',
             prev: '上一页',
@@ -239,7 +234,8 @@ function fillRepaymentTable( listData ) {
         let repayment = listData[i];
 
         // 借款标题
-        let tdTitle = '<td><a target="_blank" href="borrow-info.html?id=' + repayment.borrowId + '">' + repayment.borrowTitle + '</a>&nbsp;<span class="label label-primary">信</span></td>';
+        let tdTitle = '<td><a target="_blank" href=' + repayment.borrowId + '"borrow-info.html?id=">' + repayment.borrowTitle + '</a>&nbsp;<span class="label label-primary">信</span></td>';
+
         // 还款金额
         let totalAmount = repayment.totalAmount / MONEY_UNIT;
         let tdTotalAmount = '<td class="text-primary">' + totalAmount + '元</td>';
@@ -280,7 +276,7 @@ function fillRepaymentTable( listData ) {
 function repaymentById( id ) {
 
     // 加载'还款记录'数据
-    $.post('http://localhost:8082/finance/repayment/repay', {
+    $.post('http://localhost:8080/finance/repayment/repay', {
 
         id: id,
 		userId: user.id

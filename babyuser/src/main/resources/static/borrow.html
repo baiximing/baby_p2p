@@ -57,7 +57,7 @@
 				借款信息
 				<label class="label label-primary">信用标</label>
 			</div>
-			<form class="form-horizontal el-borrow-form" id="editForm" novalidate="novalidate" method="post" action="http://localhost:8081//finance/borrow/add">
+			<form class="form-horizontal el-borrow-form" id="editForm" novalidate="novalidate" method="post" action="http://localhost:8080//finance/borrow/add">
 				<div class="form-group">
 					<label class="col-sm-3 control-label">
 						借款金额
@@ -164,10 +164,12 @@
 let jsonUser = sessionStorage.getItem("user");
 if(!jsonUser) window.location.href = 'index.html';
 
-// 如果用户已经登录，则解析出user对象
+// 如果用户已经登录，则解析出user对
+
 let user1 = JSON.parse(jsonUser);
-let user =eval("("+user1+")");
+let user = eval("("+user1+")");
 $(function(){
+
     // 加载公共顶部模板
     $('.el-header').load('tpl-head.html');
 
@@ -203,12 +205,11 @@ $(function(){
 
         // '借款'表单验证
         $("#editForm").validate({
-
             rules : {
                 showBorrowAmount:{
                     required:true,
                     number:true,
-                    min:50,
+                    min:500,
 					max: residualCreditLine,
 					integerMutiple: 100	// 100的整数倍
                 },

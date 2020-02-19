@@ -47,8 +47,6 @@ public class UserController {
     private MD5 md5;
 
 
-
-
     /**
      * 登陆
      * @return
@@ -73,11 +71,6 @@ public class UserController {
         tLoginLog.setLoginResult(0);
         tLoginLog.setIp(Ip.getIp(request));
         if (tUserAccount!=null){
-            if (tUserAccount.getAccountType()==2){
-                System.err.println(tUserAccount.getAccountType());
-                map.put("type",2);
-            }
-
             tLoginLog.setLoginResult(1);
             tUserAccount.setLastLoginTime(new Date());
             int num=userService.updateById(tUserAccount);        //修改登陆时间
@@ -375,7 +368,4 @@ public class UserController {
         map.put("msg","绑定失败!!!");
         return map;
     }
-
-
-
 }

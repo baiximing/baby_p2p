@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>宝贝投-P2P平台</title>
 		<!-- links begin -->
-		<link rel="shortcut icon" href="../static/favicon.ico" />
+		<link rel="shortcut icon" href="favicon.ico" />
         <link rel="stylesheet" href="/js/bootstrap-3.3.2-dist/css/bootstrap.css" type="text/css" />
         <link rel="stylesheet" href="/css/core.css" type="text/css" />
         <script type="text/javascript" src="/js/jquery/jquery-2.1.3.js"></script>
@@ -256,7 +256,8 @@ let jsonUser = sessionStorage.getItem("user");
 if(!jsonUser) window.location.href = '/user/toIndex';
 
 // 如果用户已经登录，则解析出user对象
-let user = JSON.parse(jsonUser);
+let user1 = JSON.parse(jsonUser);
+let user = eval("("+user1+")");
 
 $(function(){
 
@@ -271,7 +272,7 @@ $(function(){
 
 	// 加载页脚模板
 	$('.container-foot-2').load('tpl-footer.html');
-
+    $('#accountId').val(user.id);
 	// AJAX提交表单
 	$("#userInfoForm").ajaxForm(function(result){
 
@@ -289,6 +290,7 @@ $(function(){
             sessionStorage.setItem( "user", JSON.stringify(user) );
 
 			window.location.reload();
+            /*window.location.href="userinfo.html";*/
 		})
 
 	});// $("#userInfoForm").ajaxForm();
@@ -419,13 +421,13 @@ function fillSelect( dom, systemDictionaryId ) {
 /** 加载'个人信息'数据 **/
 function loadingUserInfo() {
 
+
     // 加载个人信息
     $.ajax({
 		type: 'GET',
 		url: 'http://localhost:8080/user/userinfo/get/' + user.id,
 		async: false,
 		success: function (result) {
-
             // 如果返回的数据的响应码不是'成功(200)'
             if (result.code != 200) {
                 $.messager.alert(result.msg);

@@ -225,6 +225,7 @@ let borrowId = GetQueryString('id');
 let borrowUserId = '';
 
 $(function(){
+
     // 加载公共顶部模板
     $('.mgr-header').load('tpl-head.html');
 
@@ -252,7 +253,7 @@ $(function(){
 function loadingRepayment(){
 
     // 加载'还款记录'数据
-    $.post('http://localhost:8082/finance/repayment/getByBorrowId', {
+    $.post('http://localhost:8080/finance/repayment/getByBorrowId', {
 
         borrowId: borrowId
 
@@ -315,7 +316,7 @@ function fillRepaymentTable( listData ) {
 function loadingBid(){
 
     // 加载'充值记录'数据
-    $.post('http://localhost:8082/finance/bid/getByBorrowId/' + borrowId, function (result) {
+    $.post('http://localhost:8080/finance/bid/getByBorrowId/' + borrowId, function (result) {
 
         // 如果返回的数据的响应码不是'成功(200)'
         if(result.code != 200) {
@@ -375,7 +376,7 @@ function loadingSystemDictionaryItemList(){
     // 加载'数据字典'数据
     $.ajax({
         type: 'GET',
-        url: 'http://localhost:8082/system/dictionaryItem/getAll',
+        url: 'http://localhost:8080/system/dictionaryItem/getAll',
         async: false,
         success: function (result) {
 
@@ -402,7 +403,7 @@ function loadingBorrow() {
     $.ajax({
         type: 'GET',
 		async: false,
-        url: 'http://localhost:8081/finance/borrow/get/' + borrowId,
+        url: 'http://localhost:8080/finance/borrow/get/' + borrowId,
         success: function (result) {
 
             // 如果返回的数据的响应码不是'成功(200)'

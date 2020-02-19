@@ -58,7 +58,7 @@ body{
             success:function(result){
 
                 // 如果返回的数据的响应码不是'成功(200)'
-                if(result.code != 200||result.type!=2) {
+                if(result.code != 200) {
                     $.messager.alert(result.msg);
                     return;
                 }
